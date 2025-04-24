@@ -1,0 +1,36 @@
+server:
+  port: 80 # 사용 포트
+  tomcat:
+    threads:
+      max: 400
+      min-spare: 50
+    accept-count: 200
+    connection-timeout: 1800000
+    max-connections: 10000
+    accesslog:
+      enabled: true # access 로그 추가
+    basedir: .
+  servlet:
+    context-path: /auth
+
+spring:
+  profiles:
+    active: local  # default profile
+  datasource:
+    driver-class-name: com.tmax.tibero.jdbc.TbDriver
+    hikari:
+      maximum-pool-size: 20
+  jpa:
+    hibernate:
+      ddl-auto: none # tibero
+    show-sql: false
+    database-platform: org.hibernate.dialect.OracleDialect # tibero
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  config: classpath:logback-release.xml
+  file:
+    path: # 로그 경로 추가
+  level:
+    com.zaxxer.hikari: WARN
+    com.zaxxer.hikari.HikariConfig: WARN

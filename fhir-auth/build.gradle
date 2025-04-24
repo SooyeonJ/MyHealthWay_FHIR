@@ -1,0 +1,65 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.code'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+apply plugin: 'maven-publish'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+publishing {
+    publications {
+        customLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'sampleRepo'
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    // ojdbc
+    maven { url "https://maven.jahia.org/maven2"}
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // DB 쿼리 작성을 쉽게 하기 위함
+    implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티
+    implementation 'org.springframework.boot:spring-boot-starter-web' // mvc 웹 구조 사용을 위함
+    implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.5.2.RELEASE' // spring oauth 2.0
+    implementation 'org.apache.commons:commons-lang3:3.8' // 유틸리티 사용을 위함
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok' // 변수 get, set 함수 편리하게 만들기 위함
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // db
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.23' // 추가
+    implementation files('libs/tibero6-jdbc.jar') // tibero local repo
+    implementation 'com.oracle:ojdbc7:12.1.0.2' // tibero
+    runtimeOnly 'mysql:mysql-connector-java' // mysql 사용
+    runtimeOnly 'org.postgresql:postgresql' // 추가
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'junit:junit:4.13.1'
+}
+
+test {
+    useJUnitPlatform()
+}

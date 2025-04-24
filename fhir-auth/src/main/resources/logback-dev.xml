@@ -1,0 +1,22 @@
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+
+	<property name="LOG_DIR" value="/app-server/auth/logs"/>
+	<property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger - %msg%n"/>
+
+	<include resource="file-info-appender.xml"/>
+
+	<root level="INFO">
+		<appender-ref ref="FILE-INFO"/>
+	</root>
+
+	<logger level="DEBUG" name="org.hibernate.SQL">
+		<appender-ref ref="FILE-INFO"/>
+	</logger>
+
+	<logger level="TRACE" name="org.hibernate.type.descriptor.sql.BasicBinder">
+		<appender-ref ref="FILE-INFO"/>
+	</logger>
+
+</configuration>

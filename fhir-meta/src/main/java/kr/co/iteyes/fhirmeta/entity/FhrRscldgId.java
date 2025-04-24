@@ -1,0 +1,21 @@
+package kr.co.iteyes.fhirmeta.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import lombok.*;
+
+import java.io.Serializable;
+
+@Embeddable
+@EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@Getter
+public class FhrRscldgId implements Serializable {
+    @Column(length = 6)
+    private String stptPnstNo;
+    private String ldgYmd;
+    private String cisn;
+    private String fhirRscTpcd;
+}

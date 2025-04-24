@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: dam
+
+  datasource:
+    url : jdbc:tibero:thin:@192.168.130.134:38629:tibero
+    driver-Class-Name: com.tmax.tibero.jdbc.TbDriver
+    username: dev_auth
+    password: mhw1234!@
+    hikari:
+      maximum-pool-size: 20
+    tomcat:
+      validation-query: "SELECT 1 FROM DUAL"
+      validation-interval: 60000

@@ -1,0 +1,19 @@
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+
+	<property name="LOG_DIR" value="/app/logs"/>
+	<property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger - %msg%n"/>
+
+	<include resource="file-error-appender.xml"/>
+	<include resource="file-info-appender.xml"/>
+
+	<root level="ERROR">
+		<appender-ref ref="FILE-ERROR"/>
+	</root>
+
+	<root level="INFO">
+		<appender-ref ref="FILE-INFO"/>
+	</root>
+
+</configuration>
